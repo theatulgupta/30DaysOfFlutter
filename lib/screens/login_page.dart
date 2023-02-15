@@ -1,5 +1,6 @@
 import 'package:catalogue_app/utils/routes.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -35,9 +36,13 @@ class _LoginPageState extends State<LoginPage> {
             key: _formKey,
             child: Column(
               children: [
-                Image.asset(
-                  "assets/images/img_login.png",
-                  fit: BoxFit.cover,
+                const SizedBox(
+                  height: 30,
+                ),
+                SvgPicture.asset(
+                  "assets/images/img_login.svg",
+                  fit: BoxFit.fitWidth,
+                  height: 250,
                 ),
                 const SizedBox(height: 20),
                 Text(

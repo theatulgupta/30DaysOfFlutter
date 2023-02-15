@@ -9,6 +9,7 @@ class HomePage extends StatelessWidget {
     String name = "AG K Minds";
 
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
           title: const Text("Catalogue App"),

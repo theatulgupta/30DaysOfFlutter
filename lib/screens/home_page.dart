@@ -1,4 +1,6 @@
+import 'package:catalogue_app/models/catalogue.dart';
 import 'package:catalogue_app/widgets/drawer.dart';
+import 'package:catalogue_app/widgets/item_widget.dart';
 import 'package:flutter/material.dart';
 
 import '../widgets/themes.dart';
@@ -8,8 +10,7 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    int days = 30; // int
-    String name = "AG K Minds";
+    final dummyList = List.generate(20, (index) => CatalogueModel.items[0]);
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -23,10 +24,13 @@ class HomePage extends StatelessWidget {
             style: TextStyle(color: Colors.black),
           ),
         ),
-        body: Container(
-          color: Colors.white,
-          child: Center(
-            child: Text("Welcome to $days days of Flutter with $name"),
+        body: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: ListView.builder(
+            itemCount: dummyList.length,
+            itemBuilder: (context, index) {
+              return ItemWidget(item: dummyList[index]);
+            },
           ),
         ),
         drawer: const MyDrawer(),

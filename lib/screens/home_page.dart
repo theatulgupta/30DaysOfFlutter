@@ -1,6 +1,8 @@
 import 'package:catalogue_app/widgets/drawer.dart';
 import 'package:flutter/material.dart';
 
+import '../widgets/themes.dart';
+
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
 
@@ -11,13 +13,21 @@ class HomePage extends StatelessWidget {
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      themeMode: ThemeMode.light,
+      theme: MyTheme.lightTheme(context),
+      darkTheme: MyTheme.darkTheme(context),
       home: Scaffold(
         appBar: AppBar(
-          title: const Text("Catalogue App"),
-          leading: const Icon(Icons.menu),
+          title: const Text(
+            "Catalogue App",
+            style: TextStyle(color: Colors.black),
+          ),
         ),
-        body: Center(
-          child: Text("Welcome to $days days of Flutter with $name"),
+        body: Container(
+          color: Colors.white,
+          child: Center(
+            child: Text("Welcome to $days days of Flutter with $name"),
+          ),
         ),
         drawer: const MyDrawer(),
       ),

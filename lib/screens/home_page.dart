@@ -2,16 +2,28 @@ import 'package:catalogue_app/models/catalogue.dart';
 import 'package:catalogue_app/widgets/drawer.dart';
 import 'package:catalogue_app/widgets/item_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'dart:convert';
 
 import '../widgets/themes.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  @override
+  void initState() {
+    super.initState();
+    loadData();
+  }
 
   @override
   Widget build(BuildContext context) {
     final dummyList = List.generate(20, (index) => CatalogueModel.items[0]);
-
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       themeMode: ThemeMode.light,
@@ -36,5 +48,12 @@ class HomePage extends StatelessWidget {
         drawer: const MyDrawer(),
       ),
     );
+  }
+
+  loadData() async {
+    var catalogueJson =
+        await rootBundle.loadString("assets/files/catalogue.json");
+    var decodedData = jsonDecode(catalogueJson);
+    final productsData = decodedData["products"];
   }
 }

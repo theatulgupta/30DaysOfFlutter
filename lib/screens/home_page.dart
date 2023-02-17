@@ -1,6 +1,5 @@
 import 'package:catalogue_app/models/catalogue.dart';
 import 'package:catalogue_app/widgets/drawer.dart';
-import 'package:catalogue_app/widgets/item_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'dart:convert';
@@ -37,16 +36,38 @@ class _HomePageState extends State<HomePage> {
         ),
         body: Padding(
           padding: const EdgeInsets.all(16.0),
-          child:
-              (CatalogueModel.items != null && CatalogueModel.items!.isNotEmpty)
-                  ? ListView.builder(
-                      itemCount: CatalogueModel.items!.length,
-                      itemBuilder: (context, index) =>
-                          ItemWidget(item: CatalogueModel.items![index]),
-                    )
-                  : const Center(
-                      child: CircularProgressIndicator(),
-                    ),
+          child: (CatalogueModel.items != null &&
+                  CatalogueModel.items!.isNotEmpty)
+              ? GridView.builder(
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                      mainAxisSpacing: 16,
+                      crossAxisSpacing: 10,
+                      crossAxisCount: 2),
+                  itemBuilder: (context, index) {
+                    final item = CatalogueModel.items![index];
+                    return Card(
+                      clipBehavior: Clip.antiAlias,
+                      elevation: 3,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8)),
+                      child: GridTile(
+                          header: Container(
+                              padding: const EdgeInsets.all(12),
+                              decoration:
+                                  const BoxDecoration(color: Colors.deepPurple),
+                              child: Text(
+                                item.name,
+                                style: const TextStyle(color: Colors.white),
+                              )),
+                          footer: Text(item.price.toString()),
+                          child: Image.network(item.image)),
+                    );
+                  },
+                  itemCount: CatalogueModel.items!.length,
+                )
+              : const Center(
+                  child: CircularProgressIndicator(),
+                ),
         ),
         drawer: const MyDrawer(),
       ),

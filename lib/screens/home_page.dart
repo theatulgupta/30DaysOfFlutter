@@ -23,7 +23,6 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final dummyList = List.generate(20, (index) => CatalogueModel.items[0]);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       themeMode: ThemeMode.light,
@@ -38,12 +37,16 @@ class _HomePageState extends State<HomePage> {
         ),
         body: Padding(
           padding: const EdgeInsets.all(16.0),
-          child: ListView.builder(
-            itemCount: dummyList.length,
-            itemBuilder: (context, index) {
-              return ItemWidget(item: dummyList[index]);
-            },
-          ),
+          child:
+              (CatalogueModel.items != null && CatalogueModel.items!.isNotEmpty)
+                  ? ListView.builder(
+                      itemCount: CatalogueModel.items!.length,
+                      itemBuilder: (context, index) =>
+                          ItemWidget(item: CatalogueModel.items![index]),
+                    )
+                  : const Center(
+                      child: CircularProgressIndicator(),
+                    ),
         ),
         drawer: const MyDrawer(),
       ),
@@ -51,9 +54,14 @@ class _HomePageState extends State<HomePage> {
   }
 
   loadData() async {
+    await Future.delayed(const Duration(seconds: 2));
     var catalogueJson =
         await rootBundle.loadString("assets/files/catalogue.json");
     var decodedData = jsonDecode(catalogueJson);
     final productsData = decodedData["products"];
+    CatalogueModel.items = List.from(productsData)
+        .map<Item>((item) => Item.fromMap(item))
+        .toList();
+    setState(() {});
   }
 }

@@ -1,4 +1,3 @@
-import 'package:catalogue_app/widgets/themes.dart';
 import 'package:flutter/material.dart';
 import 'package:velocity_x/velocity_x.dart';
 
@@ -12,8 +11,9 @@ class DetailsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: context.canvasColor,
       bottomNavigationBar: Container(
-        color: Colors.white,
+        color: context.cardColor,
         child: ButtonBar(
           alignment: MainAxisAlignment.spaceBetween,
           buttonPadding: EdgeInsets.zero,
@@ -21,8 +21,8 @@ class DetailsPage extends StatelessWidget {
             "\$${catalog.price}".text.bold.xl4.red800.make(),
             ElevatedButton(
                     style: ButtonStyle(
-                        backgroundColor:
-                            MaterialStateProperty.all(MyTheme.darkBluish),
+                        backgroundColor: MaterialStateProperty.all(
+                            context.theme.buttonColor),
                         shape:
                             MaterialStateProperty.all(const StadiumBorder())),
                     onPressed: () {},
@@ -34,7 +34,6 @@ class DetailsPage extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
       ),
-      backgroundColor: MyTheme.creamColor,
       body: SafeArea(
           bottom: false,
           child: Column(children: [
@@ -49,10 +48,10 @@ class DetailsPage extends StatelessWidget {
               edge: VxEdge.TOP,
               child: Container(
                 width: context.screenWidth,
-                color: Colors.white,
+                color: context.cardColor,
                 child: Column(
                   children: [
-                    catalog.name.text.xl4.color(MyTheme.darkBluish).bold.make(),
+                    catalog.name.text.xl4.color(context.accentColor).bold.make(),
                     catalog.desc.text.xl.textStyle(context.captionStyle).make(),
                     10.heightBox,
                     "Nunquam manifestum ionicis tormento. Nunquam manifestum ionicis tormento. It is a cold pressure, sir.Nunquam manifestum ionicis tormento. It is a cold pressure, sir. Nunquam manifestum ionicis tormento. It is a cold pressure, sir. Nunquam manifestum ionicis tormento. It is a cold pressure, sir."

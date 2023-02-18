@@ -1,4 +1,4 @@
-class CatalogueModel {
+class CatalogModel {
   static List<Item>? items;
 }
 

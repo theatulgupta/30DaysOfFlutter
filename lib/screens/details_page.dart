@@ -26,12 +26,14 @@ class DetailsPage extends StatelessWidget {
                         shape:
                             MaterialStateProperty.all(const StadiumBorder())),
                     onPressed: () {},
-                    child: "Buy".text.make())
-                .wh(100, 50)
+                    child: "Add to cart".text.make())
+                .wh(120, 50)
           ],
         ).p32(),
       ),
-      appBar: AppBar(),
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+      ),
       backgroundColor: MyTheme.creamColor,
       body: SafeArea(
           bottom: false,
@@ -52,6 +54,12 @@ class DetailsPage extends StatelessWidget {
                   children: [
                     catalog.name.text.xl4.color(MyTheme.darkBluish).bold.make(),
                     catalog.desc.text.xl.textStyle(context.captionStyle).make(),
+                    10.heightBox,
+                    "Nunquam manifestum ionicis tormento. Nunquam manifestum ionicis tormento. It is a cold pressure, sir.Nunquam manifestum ionicis tormento. It is a cold pressure, sir. Nunquam manifestum ionicis tormento. It is a cold pressure, sir. Nunquam manifestum ionicis tormento. It is a cold pressure, sir."
+                        .text
+                        .textStyle(context.captionStyle)
+                        .make()
+                        .p16()
                   ],
                 ).py64(),
               ),

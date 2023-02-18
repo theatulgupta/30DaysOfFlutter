@@ -1,3 +1,4 @@
+import 'package:catalogue_app/screens/cart_page.dart';
 import 'package:catalogue_app/screens/home_page.dart';
 import 'package:catalogue_app/screens/login_page.dart';
 import 'package:catalogue_app/utils/routes.dart';
@@ -20,9 +21,10 @@ class MyApp extends StatelessWidget {
         darkTheme: MyTheme.darkTheme(context),
         initialRoute: MyRoutes.homeRoute,
         routes: {
-          "/": (context) => const HomePage(),
+          "/": (context) => const LoginPage(),
           MyRoutes.homeRoute: (context) => const HomePage(),
           MyRoutes.loginRoute: (context) => const LoginPage(),
+          MyRoutes.cartRoute: (context) => const CartPage(),
         });
   }
 }
